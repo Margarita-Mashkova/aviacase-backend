@@ -33,7 +33,7 @@ public class User implements UserDetails {
     private String password;
 
     @OneToMany
-    @JoinColumn(name = "userId")
+    @JoinColumn(name = "user_id")
     private List<Purchase> purchases;
 
     @OneToMany

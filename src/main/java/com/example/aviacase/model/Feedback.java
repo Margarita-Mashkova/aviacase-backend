@@ -1,10 +1,9 @@
 package com.example.aviacase.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
+
+import java.util.Date;
 
 @Data
 @Entity
@@ -19,7 +18,10 @@ public class Feedback {
     private String text;
 
     @NonNull
-    private int Rate;
+    private int rate;
+
+    @NonNull
+    private Date date;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -30,4 +32,11 @@ public class Feedback {
     @JoinColumn(name = "tour_id")
     @NonNull
     private Tour tour;
+
+    public Feedback(String text, @NonNull int rate, @NonNull User user, @NonNull Tour tour) {
+        this.text = text;
+        this.rate = rate;
+        this.user = user;
+        this.tour = tour;
+    }
 }

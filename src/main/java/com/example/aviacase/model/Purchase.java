@@ -14,22 +14,10 @@ import java.util.Objects;
 @Entity
 @NoArgsConstructor
 @RequiredArgsConstructor
-@IdClass(PurchaseId.class)
 public class Purchase {
-//    @ManyToOne
-//    @JoinColumn(name = "user_id")
-//    @NonNull
-//    private User user;
-//
-//    @ManyToOne
-//    @JoinColumn(name = "tour_id")
-//    @NonNull
-//    private Tour tour;
-
     @Id
-    private Long userId;
-    @Id
-    private Long tourId;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     //Date of purchase
     @NonNull
@@ -40,9 +28,16 @@ public class Purchase {
     private int tourists;
     @NonNull
     private float sum;
+    @NonNull
+    private String hotel;
 
-    @Override
-    public int hashCode() {
-        return getClass().hashCode();
-    }
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    @NonNull
+    private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "tour_id")
+    @NonNull
+    private Tour tour;
 }

@@ -28,8 +28,10 @@ public class Tour {
     @NonNull
     private float price;
 
+    private String photo;
+
     @OneToMany
-    @JoinColumn(name = "tourId")
+    @JoinColumn(name = "tour_id")
     private List<Purchase> purchases;
 
     @OneToMany

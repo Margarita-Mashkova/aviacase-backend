@@ -33,7 +33,8 @@ public class Hotel {
     @NonNull
     private float price;
 
-    @NonNull
+    private List<String> photos;
+
     @ManyToMany(mappedBy = "hotels")
     public List<Tour> tours;
 }
