@@ -5,6 +5,7 @@ import org.hibernate.validator.constraints.Length;
 
 @Data
 public class UserDto {
+    private Long id;
     @Length(min = 3, max = 20)
     private String login;
     @Length(min = 3, max = 20)

@@ -28,8 +28,11 @@ public class Purchase {
     private int tourists;
     @NonNull
     private float sum;
+
+    @ManyToOne
+    @JoinColumn(name = "hotel_id")
     @NonNull
-    private String hotel;
+    private Hotel hotel;
 
     @ManyToOne
     @JoinColumn(name = "user_id")

@@ -6,15 +6,25 @@ import com.example.aviacase.service.exception.UserLoginAlreadyExistsException;
 import com.example.aviacase.service.exception.UserNotFoundException;
 import com.example.aviacase.service.exception.WrongLoginOrPasswordException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
-public class UserService {
+public class UserService implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
 
@@ -60,7 +70,7 @@ public class UserService {
     @Transactional
     public boolean authorization(User user){
         User userDB = findUserByLogin(user.getLogin());
-        if(userDB != null && encoder.matches(userDB.getPassword(), user.getPassword())){
+        if(userDB != null && encoder.matches(user.getPassword(), userDB.getPassword())){
             return true;
         }
         else{
@@ -92,5 +102,17 @@ public class UserService {
         final User user = findUser(id);
         userRepository.delete(user);
         return user;
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = userRepository.findByLogin(username);
+        var roles = new ArrayList<>();
+        roles.add("ROLE_USER");
+        return new org.springframework.security.core.userdetails.User(
+                user.getUsername(),
+                user.getPassword(),
+                roles.stream().map(role -> new SimpleGrantedAuthority(role.toString())).collect(Collectors.toList())
+        );
     }
 }

@@ -27,14 +27,11 @@ public class Hotel {
     private int star;
 
     @NonNull
-    private boolean feed;
+    private Boolean feed;
 
     //Price for 1 night in hotel
     @NonNull
     private float price;
 
-    private List<String> photos;
-
-    @ManyToMany(mappedBy = "hotels")
-    public List<Tour> tours;
+    private String photo;
 }

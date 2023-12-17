@@ -3,5 +3,10 @@ package com.example.aviacase.repository;
 import com.example.aviacase.model.Hotel;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
+
 public interface HotelRepository extends JpaRepository<Hotel, Long> {
+    List<Hotel> findByLocationIgnoreCaseContainingAndNameIgnoreCaseContaining(String location, String name);
+    List<Hotel> findByLocationIgnoreCaseContaining(String location);
+    List<Hotel> findByNameIgnoreCaseContaining(String name);
 }

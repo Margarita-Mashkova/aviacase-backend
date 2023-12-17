@@ -82,4 +82,15 @@ public class User implements UserDetails {
     public int hashCode() {
         return getClass().hashCode();
     }
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + "(" +
+                "id = " + id + ", " +
+                "login = " + login + ", " +
+                "password = " + password + ", " +
+                "name = " + name + ", " +
+                "surname = " + surname + ", ";
+    }
+
 }

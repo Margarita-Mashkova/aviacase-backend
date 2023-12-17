@@ -17,7 +17,6 @@ public class Feedback {
     @Column(length = 1000)
     private String text;
 
-    @NonNull
     private int rate;
 
     @NonNull
@@ -33,7 +32,7 @@ public class Feedback {
     @NonNull
     private Tour tour;
 
-    public Feedback(String text, @NonNull int rate, @NonNull User user, @NonNull Tour tour) {
+    public Feedback(String text, int rate, @NonNull User user, @NonNull Tour tour) {
         this.text = text;
         this.rate = rate;
         this.user = user;

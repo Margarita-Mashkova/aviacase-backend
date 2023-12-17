@@ -1,21 +1,20 @@
 package com.example.aviacase.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 import java.util.Date;
 
 @Data
-public class FeedbackDto {
+public class MakePurchaseDto {
     private Long id;
-    private String text;
-    private int rate;
-    @JsonFormat(pattern="dd MMM yyyy в HH:mm")
     private Date date;
+    private int nights;
+    private int tourists;
+    private float sum;
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private Long hotelId;
     private UserDto user;
-
-    //TODO: исправить tourId = null
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Long tourId;
 }
