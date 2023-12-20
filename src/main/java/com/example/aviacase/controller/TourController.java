@@ -37,6 +37,11 @@ public class TourController {
                 .toList();
     }
 
+    @GetMapping("/{id}")
+    public TourDto findTour(@PathVariable Long id){
+        return tourMapper.toTourDto(tourService.findTour(id));
+    }
+
     @GetMapping("/tours/filter")
     public List<TourDto> findToursByFilter(@RequestParam(required = false) String country,
                                            @RequestParam(required = false) String dateStart) throws ParseException {
