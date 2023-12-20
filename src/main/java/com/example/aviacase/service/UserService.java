@@ -82,7 +82,7 @@ public class UserService implements UserDetailsService {
     public User updateUser(User user, String login, String password, String name, String surname){
         User userDB = findUser(user.getId());
         if (login != null && !login.isBlank()) {
-            if (findUserByLogin(login) == null) {
+            if (findUserByLogin(login) == null || userDB.getLogin().equals(login)) {
                 userDB.setLogin(login);
             } else {
                 throw new UserLoginAlreadyExistsException(login);

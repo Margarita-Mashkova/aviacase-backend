@@ -76,4 +76,14 @@ public class UserController {
                 .map(purchase -> purchaseMapper.toPurchaseDto(purchase))
                 .toList();
     }
+
+    @GetMapping("/exit")
+    public void exit(){
+        AviacaseApplication.authenticateUser = null;
+    }
+
+    @GetMapping("/find-by-login")
+    public UserDto findUserByLogin(@RequestParam String login){
+        return userMapper.toUserDto(userService.findUserByLogin(login));
+    }
 }
