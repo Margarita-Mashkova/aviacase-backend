@@ -40,4 +40,9 @@ public class FeedbackController {
     public void deleteFeedback(@PathVariable Long id){
         feedbackService.deleteFeedback(id);
     }
+
+    @GetMapping("/allow-creating")
+    public boolean checkUserFeedback(@RequestParam Long userId, @RequestParam Long tourId){
+        return feedbackService.allowCreateFeedback(userId, tourId);
+    }
 }

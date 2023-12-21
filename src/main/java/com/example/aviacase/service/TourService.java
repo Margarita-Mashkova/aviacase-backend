@@ -4,6 +4,7 @@ import com.example.aviacase.model.Hotel;
 import com.example.aviacase.model.Tour;
 import com.example.aviacase.repository.HotelRepository;
 import com.example.aviacase.repository.TourRepository;
+import com.example.aviacase.service.exception.HotelNotFoundException;
 import com.example.aviacase.service.exception.TourNotFoundException;
 import com.example.aviacase.util.FileUploadUtil;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -46,8 +46,8 @@ public class TourController {
     public List<TourDto> findToursByFilter(@RequestParam(required = false) String country,
                                            @RequestParam(required = false) String dateStart) throws ParseException {
         Date date = null;
-        if(dateStart != null){
-            date = new SimpleDateFormat("yyyy MM dd", Locale.ENGLISH).parse(dateStart);
+        if(dateStart != null && !dateStart.isBlank()){
+            date = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).parse(dateStart);
             System.out.println(date);
         }
         return tourService.findToursByFilter(country, date)
@@ -69,13 +69,13 @@ public class TourController {
     }
 
     @PutMapping(value = "/{id}/upload", consumes = {MULTIPART_FORM_DATA_VALUE})
-    public TourDto uploadTourPhoto(@PathVariable Long id, @RequestParam(required = false) MultipartFile file){
-        return tourMapper.toTourDto(tourService.uploadPhotoForTour(id, file));
+    public TourDto uploadTourPhoto(@PathVariable Long id, @RequestParam(required = false) MultipartFile photo){
+        return tourMapper.toTourDto(tourService.uploadPhotoForTour(id, photo));
     }
 
     @PutMapping("bind-hotels/{id}")
-    public TourDto bindHotelsToTour(@PathVariable Long id, @RequestBody ListHotelsDto listHotelsDto){
-        return tourMapper.toTourDto(tourService.bindHotels(id, listHotelsDto.getHotels()
+    public TourDto bindHotelsToTour(@PathVariable Long id, @RequestBody ListHotelsDto hotels){
+        return tourMapper.toTourDto(tourService.bindHotels(id, hotels.getHotels()
                 .stream()
                 .map(hotelDto -> hotelMapper.fromHotelDto(hotelDto))
                 .toList()));

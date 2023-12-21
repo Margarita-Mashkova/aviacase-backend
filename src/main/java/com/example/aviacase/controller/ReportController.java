@@ -20,16 +20,16 @@ public class ReportController {
     @GetMapping
     public List<ReportTourPurchasesDto> makeTourPurchasesReport(@RequestParam String dateStart,
                                                                 @RequestParam String dateEnd) throws ParseException {
-        Date dateFrom = new SimpleDateFormat("yyyy MM dd", Locale.ENGLISH).parse(dateStart);
-        Date dateTo = new SimpleDateFormat("yyyy MM dd", Locale.ENGLISH).parse(dateEnd);
+        Date dateFrom = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).parse(dateStart);
+        Date dateTo = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).parse(dateEnd);
         return purchaseService.makeTourPurchasesReport(dateFrom, dateTo);
     }
 
     @GetMapping("/save")
     public void saveReportExcel(@RequestParam String dateStart,
                                 @RequestParam String dateEnd) throws ParseException {
-        Date dateFrom = new SimpleDateFormat("yyyy MM dd", Locale.ENGLISH).parse(dateStart);
-        Date dateTo = new SimpleDateFormat("yyyy MM dd", Locale.ENGLISH).parse(dateEnd);
+        Date dateFrom = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).parse(dateStart);
+        Date dateTo = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).parse(dateEnd);
         purchaseService.saveReportExcel(dateFrom, dateTo);
     }
 }

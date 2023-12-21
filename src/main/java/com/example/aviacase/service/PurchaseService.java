@@ -16,6 +16,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.*;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 
 @Service
@@ -210,9 +212,13 @@ public class PurchaseService {
             sheet.autoSizeColumn(i);
         }
 
+        Path downloadsPath = Paths.get(System.getProperty("user.home"), "Downloads");
+        Path parentPath = downloadsPath.getParent();
+        String downloadsFolderPath = parentPath.toString() + "/Downloads/";
+        String pathToSave = downloadsFolderPath.replace("\\", "/");
+
         //Запись в файл
-        String path = "./reports/";
-        try (OutputStream fileOut = new FileOutputStream(path + "TourPurchasesReport.xlsx")) {
+        try (OutputStream fileOut = new FileOutputStream(pathToSave + "TourPurchasesReport.xlsx")) {
             book.write(fileOut);
             book.close();
         } catch (FileNotFoundException e) {

@@ -27,6 +27,11 @@ public class HotelController {
                 .toList();
     }
 
+    @GetMapping("/{id}")
+    public HotelDto findHotel(@PathVariable Long id){
+        return hotelMapper.toHotelDto(hotelService.findHotel(id));
+    }
+
     @GetMapping("/hotels/filter")
     public List<HotelDto> findHotelsByFilter(@RequestParam(required = false) String location,
                                              @RequestParam(required = false) String name){
@@ -49,8 +54,8 @@ public class HotelController {
     }
 
     @PutMapping(value = "/{id}/upload", consumes = {MULTIPART_FORM_DATA_VALUE})
-    public HotelDto uploadPhotoForHotel(@PathVariable Long id, @RequestParam(required = false) MultipartFile file){
-        return hotelMapper.toHotelDto(hotelService.uploadPhotoForHotel(id, file));
+    public HotelDto uploadPhotoForHotel(@PathVariable Long id, @RequestParam(required = false) MultipartFile photo){
+        return hotelMapper.toHotelDto(hotelService.uploadPhotoForHotel(id, photo));
     }
 
     @DeleteMapping("/{id}")

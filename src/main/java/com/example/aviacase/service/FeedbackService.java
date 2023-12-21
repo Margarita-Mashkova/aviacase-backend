@@ -32,6 +32,14 @@ public class FeedbackService {
         return feedback.orElseThrow(() -> new FeedbackNotFoundException(id));
     }
 
+    @Transactional(readOnly = true)
+    public boolean allowCreateFeedback(Long userId, Long tourId){
+        var feedbacks = feedbackRepository.findByUserIdAndTourId(userId, tourId);
+        if (feedbacks.size() > 0){
+            return false;
+        }else return true;
+    }
+
     @Transactional
     public Feedback addFeedback(User user, Long tourId, String text, int rate){
         final Tour tour = tourService.findTour(tourId);

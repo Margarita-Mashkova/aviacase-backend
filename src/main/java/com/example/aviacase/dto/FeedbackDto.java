@@ -15,7 +15,6 @@ public class FeedbackDto {
     private Date date;
     private UserDto user;
 
-    //TODO: исправить tourId = null
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Long tourId;
 }
