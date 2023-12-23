@@ -78,6 +78,11 @@ public class PurchaseService {
     }
 
     @Transactional
+    public void deleteAllPurchases(){
+        purchaseRepository.deleteAll();
+    }
+
+    @Transactional
     public List<ReportTourPurchasesDto> makeTourPurchasesReport(Date dateStart, Date dateEnd){
         List<ReportTourPurchasesDto> reportData = new ArrayList<>();
         // Покупки туров за определенный период
